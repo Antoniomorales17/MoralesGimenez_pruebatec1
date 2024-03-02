@@ -19,6 +19,7 @@ public class Empleado implements Serializable {
     private String apellido;
     private String cargo;
     private Double salario;
+    
 
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
@@ -33,6 +34,7 @@ public class Empleado implements Serializable {
         this.cargo = cargo;
         this.salario = salario;
         this.fechaInicio = fechaInicio;
+        
     }
 
     public int getId() {
@@ -82,5 +84,9 @@ public class Empleado implements Serializable {
     @Override
     public String toString() {
         return "Empleado{" + "Id = " + id + " | Nombre = " + nombre + ", Apellido = " + apellido + " | Cargo = " + cargo + ", Salario = " + salario + "| Inicio = " + fechaInicio + '}';
+    }
+
+    void setActivo(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

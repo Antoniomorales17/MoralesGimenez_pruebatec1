@@ -30,27 +30,24 @@ public class Empresa {
         Controladora control = new Controladora();
 
         //Menu de inicio
-  // Menú de inicio
-System.out.println(
-    "                              ------------------- Bienvenido a JobCompany -------------------\n" +
-    "                              _______________                        |*\\_/*|________\n" +
-    "                             |  ___________  |     .-.     .-.      ||_/-\\_|______  |\n" +
-    "                             | |           | |    .****. .****.     | |           | |\n" +
-    "                             | |   0   0   | |    .*****.*****.     | |   0   0   | |\n" +
-    "                             | |     -     | |     .*********.      | |     -     | |\n" +
-    "                             | |   \\___/   | |      .*******.       | |   \\___/   | |\n" +
-    "                             | |___     ___| |       .*****.        | |___________| |\n" +
-    "                             |_____|\\_/|_____|        .***.         |_______________|\n" +
-    "                               _|__|/ \\|_|_.............*.............._|________|_\n" +
-    "                              / ********** \\                          / ********** \\\n" +
-    "                            /  ************  \\                      /  ************  \\\n" +
-    "                           --------------------                    --------------------\n" +
-    "\n" +
-    "                Estamos aquí para facilitarte todas las herramientas que necesitas\n" +
-    "                para una administración efectiva y eficiente de tus recursos humanos\n"
-);
-
-
+        System.out.println(
+            "                ------------------- Bienvenido a JobCompany -------------------\n" +
+            "                              _______________                        |*\\_/*|________\n" +
+            "                             |  ___________  |     .-.     .-.      ||_/-\\_|______  |\n" +
+            "                             | |           | |    .****. .****.     | |           | |\n" +
+            "                             | |   0   0   | |    .*****.*****.     | |   0   0   | |\n" +
+            "                             | |     -     | |     .*********.      | |     -     | |\n" +
+            "                             | |   \\___/   | |      .*******.       | |   \\___/   | |\n" +
+            "                             | |___     ___| |       .*****.        | |___________| |\n" +
+            "                             |_____|\\_/|_____|        .***.         |_______________|\n" +
+            "                               _|__|/ \\|_|_.............*.............._|________|_\n" +
+            "                              / ********** \\                          / ********** \\\n" +
+            "                            /  ************  \\                      /  ************  \\\n" +
+            "                           --------------------                    --------------------\n" +
+            "\n" +
+            "                Estamos aquí para facilitarte todas las herramientas que necesitas\n" +
+            "                para una administración efectiva y eficiente de tus recursos humanos\n"
+        );
 
         System.out.println("""
         -------------- Menú inicio --------------         
@@ -68,8 +65,8 @@ System.out.println(
             
         Pulse 0 para salir               
         """);
-        //Comienzo del programa
 
+        //Comienzo del programa
         while (!bandera) {
             System.out.println("Debe ingresar un número del 1 al 5 o pulse 0 para salir:");
             opcion = teclado.nextInt();
@@ -80,7 +77,6 @@ System.out.println(
                     break;
                 
                 case 1:
-                   
                     do {
                         System.out.println("Por favor, ingrese un texto válido, el campo es requerido.");
                         System.out.println("Ingrese el nombre: ");
@@ -95,7 +91,7 @@ System.out.println(
                         respuesta = teclado.next();
                         empleado.setCargo(respuesta);
 
-                    } while (respuesta.equals(" ") || !respuesta.matches("^[a-zA-Z]+$"));
+                    } while (respuesta.isBlank() || !respuesta.matches("^[a-zA-Z]+$"));
                     do {
                         System.out.println("Ingrese el salario: ");
                         respuesta = teclado.next();
@@ -108,7 +104,6 @@ System.out.println(
                         }
                     } while (!respuesta.matches("^[0-9]+(\\.[0-9]+)$"));
                     while (fechaInit == null) {
-
                         System.out.println("Ingrese la fecha de inicio con el siguiente formato ('yyyy-MM-dd') : ");
                         try {
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -116,15 +111,14 @@ System.out.println(
                             fechaInit = sdf.parse(respuesta);
                             empleado.setFechaInicio(fechaInit);
                         } catch (ParseException e) {
-                            System.out.println("Formato de fecha no válido.");
+                            System.out.println("Formato de fecha no válido. Por favor, inténtelo de nuevo.");
                         }
-
                     }
                     control.crearEmpleado(empleado);
-                    System.out.println("El empleado se ha agregado con exito: " + empleado.toString());
+                    System.out.println("El empleado se ha agregado con éxito: " + empleado.toString());
                     break;
 
-                //Mostar Lista
+                //Mostrar Lista
                 case 2:
                     System.out.println("------------- Empleados Registrados-------------");
                     List<Empleado> listaEmpleados = control.traerEmpleados();
@@ -133,7 +127,6 @@ System.out.println(
                     }
                     break;
 
-             
                 case 3:
                     // Mostrar la lista de empleados para que el usuario seleccione uno a editar
                     List<Empleado> empleadosEditar = control.traerEmpleados();
@@ -199,7 +192,6 @@ System.out.println(
 
                 //Eliminar empleado
                 case 4:
-                    
                     List<Empleado> empleados = control.traerEmpleados();
                     System.out.println("Lista de empleados:");
                     for (Empleado emp : empleados) {
@@ -229,21 +221,20 @@ System.out.println(
                         System.out.println("No se encontraron empleados con el cargo '" + cargoBuscar + "'.");
                     }
                     break;
-
             }
         }
         
         // Mensaje de despedida
         System.out.println("Gracias por utilizar JobCompany. ¡Hasta luego!"
                 + "         __\n" +
-" _(\\    |@@|\n" +
-"(__/\\__ \\--/ __\n" +
-"   \\___|----|  |   __\n" +
-"       \\ }{ /\\ )_ / _\\\n" +
-"       /\\__/\\ \\__O (__\n" +
-"      (--/\\--)    \\__/\n" +
-"      _)(  )(_\n" +
-"     `---''---");
+                " _(\\    |@@|\n" +
+                "(__/\\__ \\--/ __\n" +
+                "   \\___|----|  |   __\n" +
+                "       \\ }{ /\\ )_ / _\\\n" +
+                "       /\\__/\\ \\__O (__\n" +
+                "      (--/\\--)    \\__/\n" +
+                "      _)(  )(_\n" +
+                "     `---''---");
 
     }
 }

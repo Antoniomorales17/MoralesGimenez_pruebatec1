@@ -33,5 +33,6 @@ public class Controladora {
     public List<Empleado> buscarEmpleadosPorCargo(String cargo) {
         return controlPersis.buscarEmpleadosPorCargo(cargo);
     }
+    
 
 }
