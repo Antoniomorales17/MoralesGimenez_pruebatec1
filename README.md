@@ -16,3 +16,15 @@
 ![menu](https://i.imgur.com/0Xtj9iM.png)
 
 ### Funcionalidades Principales
+
+### Agregar un Nuevo Empleado
+Permite registrar la información de un nuevo empleado, incluyendo nombre, apellido, cargo, salario y fecha de inicio.
+
+#### Instrucciones:
+Selecciona la opción 1 en el menú principal. Ingresa la información solicitada
+
+### Listar Empleados
+Muestra la lista de todos los empleados registrados en el sistema.
+
+#### Instrucciones:
+Selecciona la opción 2 en el menú principal.
