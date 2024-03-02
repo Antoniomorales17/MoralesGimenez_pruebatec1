@@ -30,13 +30,27 @@ public class Empresa {
         Controladora control = new Controladora();
 
         //Menu de inicio
-        System.out.println("""
-        ------------------- Bienvenido a JobCompany -------------------
-                           
-                Estamos aquí para facilitarte todas las herramientas que necesitas
-                para una administración efectiva y eficiente de tus recursos humanos                       
-              
-                            """);
+  // Menú de inicio
+System.out.println(
+    "                              ------------------- Bienvenido a JobCompany -------------------\n" +
+    "                              _______________                        |*\\_/*|________\n" +
+    "                             |  ___________  |     .-.     .-.      ||_/-\\_|______  |\n" +
+    "                             | |           | |    .****. .****.     | |           | |\n" +
+    "                             | |   0   0   | |    .*****.*****.     | |   0   0   | |\n" +
+    "                             | |     -     | |     .*********.      | |     -     | |\n" +
+    "                             | |   \\___/   | |      .*******.       | |   \\___/   | |\n" +
+    "                             | |___     ___| |       .*****.        | |___________| |\n" +
+    "                             |_____|\\_/|_____|        .***.         |_______________|\n" +
+    "                               _|__|/ \\|_|_.............*.............._|________|_\n" +
+    "                              / ********** \\                          / ********** \\\n" +
+    "                            /  ************  \\                      /  ************  \\\n" +
+    "                           --------------------                    --------------------\n" +
+    "\n" +
+    "                Estamos aquí para facilitarte todas las herramientas que necesitas\n" +
+    "                para una administración efectiva y eficiente de tus recursos humanos\n"
+);
+
+
 
         System.out.println("""
         -------------- Menú inicio --------------         
@@ -64,9 +78,9 @@ public class Empresa {
                 case 0:
                     bandera = true;
                     break;
-                //Mostrar lista de empleados
+                
                 case 1:
-                    //Evaluo que el dato sea string, ni esté vacío
+                   
                     do {
                         System.out.println("Por favor, ingrese un texto válido, el campo es requerido.");
                         System.out.println("Ingrese el nombre: ");
@@ -119,10 +133,73 @@ public class Empresa {
                     }
                     break;
 
-              
+             
+                case 3:
+                    // Mostrar la lista de empleados para que el usuario seleccione uno a editar
+                    List<Empleado> empleadosEditar = control.traerEmpleados();
+                    System.out.println("Lista de empleados:");
+                    for (Empleado emp : empleadosEditar) {
+                        System.out.println(emp.toString());
+                    }
+                    System.out.println("Ingrese el ID del empleado que desea editar:");
+                    int idEmpleadoEditar = teclado.nextInt();
+
+                    // Buscar el empleado por su ID
+                    Empleado empleadoEditar = control.buscarEmpleado(idEmpleadoEditar);
+
+                    if (empleadoEditar != null) {
+                        // Mostrar opciones para actualizar la información del empleado
+                        System.out.println("Seleccione el campo que desea actualizar:");
+                        System.out.println("1. Nombre");
+                        System.out.println("2. Apellido");
+                        System.out.println("3. Cargo");
+                        System.out.println("4. Salario");
+                        System.out.println("5. Fecha de inicio");
+
+                        int opcionActualizar = teclado.nextInt();
+                        switch (opcionActualizar) {
+                            case 1:
+                                System.out.println("Ingrese el nuevo nombre:");
+                                empleadoEditar.setNombre(teclado.next());
+                                break;
+                            case 2:
+                                System.out.println("Ingrese el nuevo apellido:");
+                                empleadoEditar.setApellido(teclado.next());
+                                break;
+                            case 3:
+                                System.out.println("Ingrese el nuevo cargo:");
+                                empleadoEditar.setCargo(teclado.next());
+                                break;
+                            case 4:
+                                System.out.println("Ingrese el nuevo salario:");
+                                empleadoEditar.setSalario(teclado.nextDouble());
+                                break;
+                            case 5:
+                                System.out.println("Ingrese la nueva fecha de inicio (formato yyyy-MM-dd):");
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                try {
+                                    Date nuevaFechaInicio = sdf.parse(teclado.next());
+                                    empleadoEditar.setFechaInicio(nuevaFechaInicio);
+                                } catch (ParseException e) {
+                                    System.out.println("Formato de fecha incorrecto.");
+                                }
+                                break;
+                            default:
+                                System.out.println("Opción inválida.");
+                                break;
+                        }
+
+                        // Actualizar el empleado en la base de datos
+                        control.editarEmpleado(empleadoEditar);
+                        System.out.println("Empleado actualizado con éxito.");
+                    } else {
+                        System.out.println("No se encontró ningún empleado con el ID proporcionado.");
+                    }
+                    break;
+
                 //Eliminar empleado
                 case 4:
-                    // Mostrar la lista de empleados para que el usuario seleccione uno a eliminar
+                    
                     List<Empleado> empleados = control.traerEmpleados();
                     System.out.println("Lista de empleados:");
                     for (Empleado emp : empleados) {
@@ -135,25 +212,38 @@ public class Empresa {
                     control.eliminarEmpleado(idEmpleadoEliminar);
                     System.out.println("Empleado eliminado con éxito.");
                     break;
+                
+                case 5:
+                    System.out.println("Ingrese el cargo que desea buscar:");
+                    String cargoBuscar = teclado.next();
+
+                    // Llamar al método para buscar empleados por cargo
+                    List<Empleado> empleadosPorCargo = control.buscarEmpleadosPorCargo(cargoBuscar);
+
+                    if (!empleadosPorCargo.isEmpty()) {
+                        System.out.println("Empleados con el cargo '" + cargoBuscar + "':");
+                        for (Empleado emp : empleadosPorCargo) {
+                            System.out.println(emp.toString());
+                        }
+                    } else {
+                        System.out.println("No se encontraron empleados con el cargo '" + cargoBuscar + "'.");
+                    }
+                    break;
 
             }
         }
+        
+        // Mensaje de despedida
+        System.out.println("Gracias por utilizar JobCompany. ¡Hasta luego!"
+                + "         __\n" +
+" _(\\    |@@|\n" +
+"(__/\\__ \\--/ __\n" +
+"   \\___|----|  |   __\n" +
+"       \\ }{ /\\ )_ / _\\\n" +
+"       /\\__/\\ \\__O (__\n" +
+"      (--/\\--)    \\__/\n" +
+"      _)(  )(_\n" +
+"     `---''---");
 
-        //Proceso lectura
-        //ist<Empleado> listaEmpleados = control.traerEmpleados();
-        //r (Empleado emplead : listaEmpleados) {
-        //System.out.println(emplead.toString());
-        //}
-        //Proceso de eliminacion
-        //  int idEliminar=1;
-        //  control.eliminarEmpleado(idEliminar);
-        //Proceso edicion
-        //int idEditar = 2;
-        //Empleado empleEdit = control.buscarEmpleado(idEditar);
-        //empleEdit.setNombre("Juan");
-        //control.editarEmpleado(empleEdit);
-        //Proceso creacion
-        // Empleado empleado2 = new Empleado(2,"Francisco","Morales", "Gerente", 1.800, fechaInicio);
-        //  control.crearEmpleado(empleado2);
     }
 }

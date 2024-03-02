@@ -1,4 +1,3 @@
-
 package com.mycompany.empresa.persistencia;
 
 import com.mycompany.empresa.logica.Empleado;
@@ -13,16 +12,15 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-
 public class EmpleadoJpaController implements Serializable {
 
     public EmpleadoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-    
-     public EmpleadoJpaController() {
-        emf= Persistence.createEntityManagerFactory("empresaPU");
+
+    public EmpleadoJpaController() {
+        emf = Persistence.createEntityManagerFactory("empresaPU");
     }
 
     public EntityManager getEntityManager() {
@@ -132,5 +130,5 @@ public class EmpleadoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

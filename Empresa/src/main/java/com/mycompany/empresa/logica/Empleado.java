@@ -1,7 +1,4 @@
-
 package com.mycompany.empresa.logica;
-
-
 
 import java.io.Serializable;
 import java.util.Date;
@@ -29,9 +26,8 @@ public class Empleado implements Serializable {
     public Empleado() {
     }
 
-    public Empleado( String nombre, String apellido, String cargo, Double salario, Date fechaInicio) {
+    public Empleado(String nombre, String apellido, String cargo, Double salario, Date fechaInicio) {
 
-       
         this.nombre = nombre;
         this.apellido = apellido;
         this.cargo = cargo;
@@ -42,7 +38,6 @@ public class Empleado implements Serializable {
     public int getId() {
         return id;
     }
-
 
     public String getNombre() {
         return nombre;
@@ -83,12 +78,9 @@ public class Empleado implements Serializable {
     public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
-    
-    
-   
 
     @Override
     public String toString() {
-        return "Empleado{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cargo=" + cargo + ", salario=" + salario + ", fechaInicio=" + fechaInicio + '}';
+        return "Empleado{" + "Id = " + id + " | Nombre = " + nombre + ", Apellido = " + apellido + " | Cargo = " + cargo + ", Salario = " + salario + "| Inicio = " + fechaInicio + '}';
     }
 }
