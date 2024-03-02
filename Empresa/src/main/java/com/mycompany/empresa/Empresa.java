@@ -11,42 +11,37 @@ import java.text.ParseException;
 public class Empresa {
 
     public static void main(String[] args) {
-        Date fechaInicio = new Date();
 
-        //variables
         boolean bandera = false;
         int opcion;
         String respuesta = "";
         double opcDbl;
         Date fechaInit = null;
 
-        //Creo instancia de la clase Empleado
         Empleado empleado = new Empleado();
 
-        //Creo Scanner para leer datos por teclado
         Scanner teclado = new Scanner(System.in);
 
-        //Creamos la tabla empleado
         Controladora control = new Controladora();
 
         //Menu de inicio
         System.out.println(
-            "                ------------------- Bienvenido a JobCompany -------------------\n" +
-            "                              _______________                        |*\\_/*|________\n" +
-            "                             |  ___________  |     .-.     .-.      ||_/-\\_|______  |\n" +
-            "                             | |           | |    .****. .****.     | |           | |\n" +
-            "                             | |   0   0   | |    .*****.*****.     | |   0   0   | |\n" +
-            "                             | |     -     | |     .*********.      | |     -     | |\n" +
-            "                             | |   \\___/   | |      .*******.       | |   \\___/   | |\n" +
-            "                             | |___     ___| |       .*****.        | |___________| |\n" +
-            "                             |_____|\\_/|_____|        .***.         |_______________|\n" +
-            "                               _|__|/ \\|_|_.............*.............._|________|_\n" +
-            "                              / ********** \\                          / ********** \\\n" +
-            "                            /  ************  \\                      /  ************  \\\n" +
-            "                           --------------------                    --------------------\n" +
-            "\n" +
-            "                Estamos aquí para facilitarte todas las herramientas que necesitas\n" +
-            "                para una administración efectiva y eficiente de tus recursos humanos\n"
+                "                          ------------------- Bienvenido a JobCompany -------------------\n"
+                + "                              _______________                        |*\\_/*|________\n"
+                + "                             |  ___________  |     .-.     .-.      ||_/-\\_|______  |\n"
+                + "                             | |           | |    .****. .****.     | |           | |\n"
+                + "                             | |   0   0   | |    .*****.*****.     | |   0   0   | |\n"
+                + "                             | |     -     | |     .*********.      | |     -     | |\n"
+                + "                             | |   \\___/   | |      .*******.       | |   \\___/   | |\n"
+                + "                             | |___     ___| |       .*****.        | |___________| |\n"
+                + "                             |_____|\\_/|_____|        .***.         |_______________|\n"
+                + "                               _|__|/ \\|_|_.............*.............._|________|_\n"
+                + "                              / ********** \\                          / ********** \\\n"
+                + "                            /  ************  \\                      /  ************  \\\n"
+                + "                           --------------------                    --------------------\n"
+                + "\n"
+                + "                Estamos aquí para facilitarte todas las herramientas que necesitas\n"
+                + "                para una administración efectiva y eficiente de su compañía\n"
         );
 
         System.out.println("""
@@ -75,7 +70,7 @@ public class Empresa {
                 case 0:
                     bandera = true;
                     break;
-                
+
                 case 1:
                     do {
                         System.out.println("Por favor, ingrese un texto válido, el campo es requerido.");
@@ -141,7 +136,7 @@ public class Empresa {
                     Empleado empleadoEditar = control.buscarEmpleado(idEmpleadoEditar);
 
                     if (empleadoEditar != null) {
-                        // Mostrar opciones para actualizar la información del empleado
+
                         System.out.println("Seleccione el campo que desea actualizar:");
                         System.out.println("1. Nombre");
                         System.out.println("2. Apellido");
@@ -204,12 +199,18 @@ public class Empresa {
                     control.eliminarEmpleado(idEmpleadoEliminar);
                     System.out.println("Empleado eliminado con éxito.");
                     break;
-                
+
                 case 5:
+                    // Mostrar  los cargos de los empleados disponibles
+                    System.out.println("Cargos disponibles:");
+                    List<Empleado> todosEmpleados = control.traerEmpleados();
+                    for (Empleado emp : todosEmpleados) {
+                        System.out.println(emp.getCargo());
+                    }
+
                     System.out.println("Ingrese el cargo que desea buscar:");
                     String cargoBuscar = teclado.next();
 
-                    // Llamar al método para buscar empleados por cargo
                     List<Empleado> empleadosPorCargo = control.buscarEmpleadosPorCargo(cargoBuscar);
 
                     if (!empleadosPorCargo.isEmpty()) {
@@ -221,20 +222,20 @@ public class Empresa {
                         System.out.println("No se encontraron empleados con el cargo '" + cargoBuscar + "'.");
                     }
                     break;
+
             }
         }
-        
-        // Mensaje de despedida
+
         System.out.println("Gracias por utilizar JobCompany. ¡Hasta luego!"
-                + "         __\n" +
-                " _(\\    |@@|\n" +
-                "(__/\\__ \\--/ __\n" +
-                "   \\___|----|  |   __\n" +
-                "       \\ }{ /\\ )_ / _\\\n" +
-                "       /\\__/\\ \\__O (__\n" +
-                "      (--/\\--)    \\__/\n" +
-                "      _)(  )(_\n" +
-                "     `---''---");
+                + "         __\n"
+                + " _(\\    |@@|\n"
+                + "(__/\\__ \\--/ __\n"
+                + "   \\___|----|  |   __\n"
+                + "       \\ }{ /\\ )_ / _\\\n"
+                + "       /\\__/\\ \\__O (__\n"
+                + "      (--/\\--)    \\__/\n"
+                + "      _)(  )(_\n"
+                + "     `---''---");
 
     }
 }
