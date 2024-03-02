@@ -1,6 +1,8 @@
 # Documentación JobCompany
 ## Prueba Técnica del Módulo Java Básico para Bootcamp Hack A Boss
 
+![gif](https://i.imgur.com/vH8eTBZ.png)
+
  Aplicación Java diseñada para administrar la información de los empleados de una organización mediante el uso de Java Persistence API (JPA). A continuación, se explica el funcionamiento de las principales funcionalidades.
 
  ### Características
