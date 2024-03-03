@@ -70,7 +70,7 @@ Contraseña: ""
 
 #### Instrucciones:
 
-✅ Selecciona la opción 5 en el menú principal. Ingresa el cargo por el cual deseas filtrar.
+✅ Selecciona la opción 5 en el menú principal. Muestra un listado de los cargos para filtrar.
 
 ## Validación de datos
 
@@ -92,7 +92,7 @@ Contraseña: ""
 
 #### Eliminar un Empleado
 
-🔵 Validación de ID existente: Antes de proceder con la eliminación, se verifica que el ID proporcionado corresponda a un empleado existente en la base de datos.
+🔵 Validación de ID existente: Antes de proceder con la eliminación, se verifica que el ID proporcionado corresponda a un empleado existente en la base de datos.Además, se verifica la confirmacion de eliminar al empleado.
 
 #### Buscar Empleados por Cargo
 
