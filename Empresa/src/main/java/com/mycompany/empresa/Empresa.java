@@ -114,6 +114,7 @@ public class Empresa {
                     break;
 
                 //Mostrar Lista
+                    
                 case 2:
                     System.out.println("------------- Empleados Registrados-------------");
                     List<Empleado> listaEmpleados = control.traerEmpleados();
@@ -123,6 +124,7 @@ public class Empresa {
                     break;
 
                 case 3:
+                    
                     // Mostrar la lista de empleados para que el usuario seleccione uno a editar
                     List<Empleado> empleadosEditar = control.traerEmpleados();
                     System.out.println("Lista de empleados:");
@@ -186,21 +188,31 @@ public class Empresa {
                     break;
 
                 //Eliminar empleado
+                    
                 case 4:
-                    List<Empleado> empleados = control.traerEmpleados();
-                    System.out.println("Lista de empleados:");
-                    for (Empleado emp : empleados) {
-                        System.out.println(emp.toString());
-                    }
-                    System.out.println("Ingrese el ID del empleado que desea eliminar:");
-                    int idEmpleadoEliminar = teclado.nextInt();
+    List<Empleado> empleados = control.traerEmpleados();
+    System.out.println("Lista de empleados:");
+    for (Empleado emp : empleados) {
+        System.out.println(emp.toString());
+    }
+    System.out.println("Ingrese el ID del empleado que desea eliminar:");
+    int idEmpleadoEliminar = teclado.nextInt();
 
-                    // Llamar al método eliminarEmpleado de la controladora
-                    control.eliminarEmpleado(idEmpleadoEliminar);
-                    System.out.println("Empleado eliminado con éxito.");
-                    break;
+    // Confirmación antes de eliminar al empleado
+    System.out.println("¿Está seguro de que desea eliminar a este empleado? (S/N)");
+    String confirmacion = teclado.next();
+    if (confirmacion.equalsIgnoreCase("S")) {
+        // Llamar al método eliminarEmpleado de la controladora
+        control.eliminarEmpleado(idEmpleadoEliminar);
+        System.out.println("Empleado eliminado con éxito.");
+    } else {
+        System.out.println("Operación de eliminación cancelada.");
+    }
+    break;
+
 
                 case 5:
+
                     // Mostrar  los cargos de los empleados disponibles
                     System.out.println("Cargos disponibles:");
                     List<Empleado> todosEmpleados = control.traerEmpleados();
