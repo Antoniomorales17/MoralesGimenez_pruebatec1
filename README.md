@@ -77,6 +77,7 @@ Contraseña: ""
 #### Agregar un Nuevo Empleado
 
 🔵 Validación de campos requeridos: Se asegura de que se proporcionen todos los campos obligatorios (nombre, apellido, cargo, salario, fecha de inicio) antes de registrar al empleado.
+
 🔵 Validación de datos válidos: Cada campo se valida para garantizar que los datos ingresados sean válidos y cumplan con los criterios establecidos.
 
 #### Listar Empleados
@@ -86,6 +87,7 @@ Contraseña: ""
 #### Actualizar Información de un Empleado
 
 🔵 Validación de ID existente: Antes de permitir la modificación, se verifica que el ID proporcionado corresponda a un empleado existente en la base de datos.
+
 🔵 Validación de Campos Modificables: Se asegura de que solo se puedan modificar los campos específicos (nombre, apellido, cargo, salario, fecha de inicio) y que los datos modificados sean válidos.
 
 #### Eliminar un Empleado
@@ -99,4 +101,5 @@ Contraseña: ""
 #### Menú Principal
 
 🔵 Validación de Opciones del Menú: El sistema garantiza que solo se puedan seleccionar opciones válidas del menú principal (opciones del 1 al 5).
+
 🔵 Manejo de Opciones No Válidas: Además, se implementa un mecanismo para manejar opciones no válidas, proporcionando mensajes de error claros para que el usuario pueda identificar el error.
