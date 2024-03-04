@@ -1,5 +1,5 @@
 # Documentación JobCompany 👨‍💻👨‍💻
-## Prueba Técnica del Módulo Java Básico para Bootcamp Hack A Boss
+## Prueba Técnica Java Básico Hack A Boss / Softeck
 
 ![gif](https://i.imgur.com/vH8eTBZ.png)
 
