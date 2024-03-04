@@ -12,19 +12,24 @@ public class ControladoraPersistencia {
 
     EmpleadoJpaController empleadoJpa = new EmpleadoJpaController();
 
-    public void crearEmpleado(Empleado emplead) {
-        empleadoJpa.create(emplead);
+    public void crearEmpleado(Empleado empleado) {
+        try {
+            empleadoJpa.create(empleado);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, "Error al crear empleado", ex);           
+        }
     }
 
     public List<Empleado> traerEmpleados() {
         return empleadoJpa.findEmpleadoEntities();
     }
 
-    public void eliminarEmpleado(int idEliminar) {
+    public void eliminarEmpleado(int idEliminar) throws NonexistentEntityException {
         try {
             empleadoJpa.destroy(idEliminar);
         } catch (NonexistentEntityException ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, "Empleado no encontrado para eliminación", ex);
+            throw ex;
         }
     }
 
@@ -32,13 +37,12 @@ public class ControladoraPersistencia {
         return empleadoJpa.findEmpleado(idEditar);
     }
 
-    public void editarEmpleado(Empleado empleEdit) {
+    public void editarEmpleado(Empleado empleado) {
         try {
-            empleadoJpa.edit(empleEdit);
+            empleadoJpa.edit(empleado);
         } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, "Error al editar empleado", ex);          
         }
-
     }
 
     public List<Empleado> buscarEmpleadosPorCargo(String cargo) {
@@ -52,6 +56,4 @@ public class ControladoraPersistencia {
             entityManager.close();
         }
     }
-    
-    
 }

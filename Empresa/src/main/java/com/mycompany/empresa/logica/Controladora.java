@@ -1,8 +1,10 @@
 package com.mycompany.empresa.logica;
 
 import com.mycompany.empresa.persistencia.ControladoraPersistencia;
-
+import com.mycompany.empresa.persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Controladora {
 
@@ -17,7 +19,11 @@ public class Controladora {
     }
 
     public void eliminarEmpleado(int idEliminar) {
-        controlPersis.eliminarEmpleado(idEliminar);
+        try {
+            controlPersis.eliminarEmpleado(idEliminar);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
