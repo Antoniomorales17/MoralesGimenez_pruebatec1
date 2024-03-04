@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-03-2024 a las 18:30:34
+-- Tiempo de generación: 04-03-2024 a las 11:31:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -41,8 +41,6 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`ID`, `APELLIDO`, `CARGO`, `FECHAINICIO`, `NOMBRE`, `SALARIO`) VALUES
-(5, 'Sevilla', 'Portero', '2000-10-10', 'Emilio', 3),
-(6, 'Sanchez', 'Presidente', '2023-07-05', 'Pedro', 10),
 (7, 'Messi', 'Staff', '1992-07-08', 'Leo', 30),
 (8, 'Ronaldo', 'Jefe', '1992-05-10', 'Cristiano', 100),
 (10, 'pique', 'cantante', '2024-12-12', 'Shakira', 200000),
@@ -53,7 +51,11 @@ INSERT INTO `empleado` (`ID`, `APELLIDO`, `CARGO`, `FECHAINICIO`, `NOMBRE`, `SAL
 (17, 'Marcos', 'Staff', '2002-06-30', 'Luis', 3000),
 (18, 'Roberts', 'Actriz', '1995-12-12', 'Julia', 50000),
 (19, 'Pitt', 'Actor', '1981-03-12', 'Brad', 5000),
-(20, 'Iglesias', 'Cantante', '1960-06-10', 'Julio', 5000);
+(21, 'Cristo', 'Dios', '0002-11-30', 'Jesus', 0),
+(22, 'Del', 'monte', '2325-11-23', 'Maria', 3000),
+(27, 'Garcia', 'Ejecutiva', '2001-09-21', 'Carmen', 300),
+(28, 'Aparicio', 'Monja', '1000-12-12', 'Saul', 0),
+(31, 'Cepeda', 'Senior', '1993-12-12', 'Manuel', 12.33);
 
 --
 -- Índices para tablas volcadas
@@ -73,7 +75,7 @@ ALTER TABLE `empleado`
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
