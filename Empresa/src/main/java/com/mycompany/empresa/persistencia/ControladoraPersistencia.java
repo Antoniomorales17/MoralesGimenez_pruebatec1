@@ -1,6 +1,7 @@
 package com.mycompany.empresa.persistencia;
 
 import com.mycompany.empresa.logica.Empleado;
+import com.mycompany.empresa.logica.MiExcepcionPersonalizada;
 import com.mycompany.empresa.persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,7 +17,7 @@ public class ControladoraPersistencia {
         try {
             empleadoJpa.create(empleado);
         } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, "Error al crear empleado", ex);           
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, "Error al crear empleado", ex);
         }
     }
 
@@ -24,7 +25,11 @@ public class ControladoraPersistencia {
         return empleadoJpa.findEmpleadoEntities();
     }
 
-    public void eliminarEmpleado(int idEliminar) throws NonexistentEntityException {
+    public void eliminarEmpleado(int idEliminar) throws NonexistentEntityException, MiExcepcionPersonalizada {
+        Empleado empleado = buscarEmpleado(idEliminar);
+        if (empleado == null) {
+            throw new MiExcepcionPersonalizada("El empleado con el ID " + idEliminar + " no existe.");
+        }
         try {
             empleadoJpa.destroy(idEliminar);
         } catch (NonexistentEntityException ex) {
@@ -41,7 +46,7 @@ public class ControladoraPersistencia {
         try {
             empleadoJpa.edit(empleado);
         } catch (Exception ex) {
-            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, "Error al editar empleado", ex);          
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, "Error al editar empleado", ex);
         }
     }
 

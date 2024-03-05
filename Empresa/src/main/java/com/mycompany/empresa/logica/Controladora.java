@@ -18,7 +18,7 @@ public class Controladora {
         return controlPersis.traerEmpleados();
     }
 
-    public void eliminarEmpleado(int idEliminar) {
+    public void eliminarEmpleado(int idEliminar) throws MiExcepcionPersonalizada {
         try {
             controlPersis.eliminarEmpleado(idEliminar);
         } catch (NonexistentEntityException ex) {

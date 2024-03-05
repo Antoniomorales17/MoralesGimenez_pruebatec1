@@ -82,7 +82,7 @@ public class Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "Empleado{" + "Id = " + id + " | Nombre = " + nombre + " | Apellido = " + apellido + " | Cargo = " + cargo + " | Salario  = " + salario +" €"+  " | Inicio = " + fechaInicio + '}';
+        return "Empleado{" + "Id = " + id + " | Nombre = " + nombre + " | Apellido = " + apellido + " | Cargo = " + cargo + " | Salario  = " + salario + " €" + " | Inicio = " + fechaInicio + '}';
     }
 
 }

@@ -2,6 +2,8 @@ package com.mycompany.empresa;
 
 import com.mycompany.empresa.logica.Controladora;
 import com.mycompany.empresa.logica.Empleado;
+import com.mycompany.empresa.logica.MiExcepcionPersonalizada;
+import com.mycompany.empresa.persistencia.exceptions.NonexistentEntityException;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +16,7 @@ import java.util.Set;
 
 public class Empresa {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MiExcepcionPersonalizada {
 
         boolean bandera = false;
         int opcion;
@@ -165,34 +167,50 @@ public class Empresa {
                                 switch (opcionActualizar) {
                                     case 1:
                                         System.out.println("Ingrese el nuevo nombre:");
-                                        empleadoEditar.setNombre(teclado.next());
+                                        respuesta = teclado.next();
+                                        while (!respuesta.matches("^[a-zA-Z]+$")) {
+                                            System.out.println("Por favor, ingrese un nombre válido (solo letras): ");
+                                            respuesta = teclado.next();
+                                        }
+                                        empleadoEditar.setNombre(respuesta);
                                         break;
                                     case 2:
                                         System.out.println("Ingrese el nuevo apellido:");
-                                        empleadoEditar.setApellido(teclado.next());
+                                        respuesta = teclado.next();
+                                        while (!respuesta.matches("^[a-zA-Z]+$")) {
+                                            System.out.println("Por favor, ingrese un apellido válido (solo letras): ");
+                                            respuesta = teclado.next();
+                                        }
+                                        empleadoEditar.setApellido(respuesta);
                                         break;
                                     case 3:
                                         System.out.println("Ingrese el nuevo cargo:");
-                                        empleadoEditar.setCargo(teclado.next());
+                                        respuesta = teclado.next();
+                                        empleadoEditar.setCargo(respuesta);
                                         break;
                                     case 4:
                                         System.out.println("Ingrese el nuevo salario:");
-                                        while (!teclado.hasNextDouble()) {
-                                            System.out.println("Por favor, ingrese un salario válido en formato numérico:");
-                                            teclado.next();
-                                        }
-                                        double nuevoSalario = teclado.nextDouble();
-                                        empleadoEditar.setSalario(nuevoSalario);
+                                        do {
+                                            respuesta = teclado.next();
+                                            try {
+                                                opcDbl = Double.parseDouble(respuesta);
+                                                empleadoEditar.setSalario(opcDbl);
+                                            } catch (NumberFormatException ex) {
+                                                System.out.println("Por favor, ingrese un número decimal válido:");
+                                            }
+                                        } while (!respuesta.matches("^[0-9]+(\\.[0-9]+)$"));
                                         break;
-
                                     case 5:
                                         System.out.println("Ingrese la nueva fecha de inicio (formato yyyy-MM-dd):");
                                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                                        try {
-                                            Date nuevaFechaInicio = sdf.parse(teclado.next());
-                                            empleadoEditar.setFechaInicio(nuevaFechaInicio);
-                                        } catch (ParseException e) {
-                                            System.out.println("Formato de fecha incorrecto.");
+                                        while (fechaInit == null) {
+                                            respuesta = teclado.next();
+                                            try {
+                                                fechaInit = sdf.parse(respuesta);
+                                                empleadoEditar.setFechaInicio(fechaInit);
+                                            } catch (ParseException e) {
+                                                System.out.println("Formato de fecha incorrecto. Por favor, inténtelo de nuevo.");
+                                            }
                                         }
                                         break;
                                     default:
@@ -241,22 +259,25 @@ public class Empresa {
                         }
 
                         if (empleadoEncontrado) {
-                            System.out.println("¿Está seguro de que desea eliminar a este empleado? (S/N)");
-                            String confirmacion = "";
-                            boolean respuestaValida = false;
-                            while (!respuestaValida) {
-                                confirmacion = teclado.next().toUpperCase();
-                                if (confirmacion.equals("S") || confirmacion.equals("N")) {
-                                    respuestaValida = true;
+                            boolean confirmacion = false;
+                            while (!confirmacion) {
+                                System.out.println("¿Está seguro de que desea eliminar a este empleado? (S/N)");
+                                respuesta = teclado.next().toUpperCase();
+                                if (respuesta.equals("S")) {
+                                    try {
+                                        control.eliminarEmpleado(idEmpleadoEliminar);
+                                        System.out.println("Empleado eliminado con éxito.");
+                                        confirmacion = true;
+                                    } catch (NonexistentEntityException ex) {
+                                        System.out.println("El empleado con ID " + idEmpleadoEliminar + " no existe.");
+                                        confirmacion = true;
+                                    }
+                                } else if (respuesta.equals("N")) {
+                                    System.out.println("Operación de eliminación cancelada.");
+                                    confirmacion = true;
                                 } else {
                                     System.out.println("Por favor, ingrese una respuesta válida (S/N):");
                                 }
-                            }
-                            if (confirmacion.equals("S")) {
-                                control.eliminarEmpleado(idEmpleadoEliminar);
-                                System.out.println("Empleado eliminado con éxito.");
-                            } else {
-                                System.out.println("Operación de eliminación cancelada.");
                             }
                         } else {
                             System.out.println("El empleado con ID " + idEmpleadoEliminar + " no existe.");
