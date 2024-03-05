@@ -19,12 +19,16 @@ public class Controladora {
     }
 
     public void eliminarEmpleado(int idEliminar) throws MiExcepcionPersonalizada {
+        Empleado empleado = buscarEmpleado(idEliminar);
+        if (empleado == null) {
+            throw new MiExcepcionPersonalizada("El empleado con el ID " + idEliminar + " no existe.");
+        }
         try {
             controlPersis.eliminarEmpleado(idEliminar);
         } catch (NonexistentEntityException ex) {
-            Logger.getLogger(Controladora.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, "Empleado no encontrado para eliminación", ex);
+            throw new MiExcepcionPersonalizada("Error al eliminar el empleado con ID " + idEliminar);
         }
-
     }
 
     public Empleado buscarEmpleado(int idEditar) {

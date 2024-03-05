@@ -3,7 +3,6 @@ package com.mycompany.empresa;
 import com.mycompany.empresa.logica.Controladora;
 import com.mycompany.empresa.logica.Empleado;
 import com.mycompany.empresa.logica.MiExcepcionPersonalizada;
-import com.mycompany.empresa.persistencia.exceptions.NonexistentEntityException;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +16,9 @@ import java.util.Set;
 public class Empresa {
 
     public static void main(String[] args) throws MiExcepcionPersonalizada {
+        
+        Controladora control = new Controladora();
+        Empleado empleado = new Empleado();
 
         boolean bandera = false;
         int opcion;
@@ -24,12 +26,12 @@ public class Empresa {
         double opcDbl;
         Date fechaInit = null;
 
-        Empleado empleado = new Empleado();
+       
 
         Scanner teclado = new Scanner(System.in);
         teclado.useLocale(Locale.US);
 
-        Controladora control = new Controladora();
+        
 
         //Menu de inicio
         System.out.println(
@@ -268,8 +270,9 @@ public class Empresa {
                                         control.eliminarEmpleado(idEmpleadoEliminar);
                                         System.out.println("Empleado eliminado con éxito.");
                                         confirmacion = true;
-                                    } catch (NonexistentEntityException ex) {
-                                        System.out.println("El empleado con ID " + idEmpleadoEliminar + " no existe.");
+                                        //Lanzamos excepcion si no hay usuario con ese ID
+                                    } catch (MiExcepcionPersonalizada ex) {
+                                        System.out.println(ex.getMessage());
                                         confirmacion = true;
                                     }
                                 } else if (respuesta.equals("N")) {
