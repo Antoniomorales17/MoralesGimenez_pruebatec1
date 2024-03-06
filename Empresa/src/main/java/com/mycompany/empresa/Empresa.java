@@ -16,7 +16,7 @@ import java.util.Set;
 public class Empresa {
 
     public static void main(String[] args) throws MiExcepcionPersonalizada {
-        
+
         Controladora control = new Controladora();
         Empleado empleado = new Empleado();
 
@@ -26,12 +26,8 @@ public class Empresa {
         double opcDbl;
         Date fechaInit = null;
 
-       
-
         Scanner teclado = new Scanner(System.in);
         teclado.useLocale(Locale.US);
-
-        
 
         //Menu de inicio
         System.out.println(
@@ -294,7 +290,8 @@ public class Empresa {
                         Set<String> cargos = new HashSet<>();
                         List<Empleado> todosEmpleados = control.traerEmpleados();
                         for (Empleado emp : todosEmpleados) {
-                            cargos.add(emp.getCargo());
+                            // Convertir el cargo a minúsculas antes de agregarlo al conjunto
+                            cargos.add(emp.getCargo().toLowerCase());
                         }
 
                         for (String cargo : cargos) {
@@ -305,7 +302,7 @@ public class Empresa {
                         while (!validInput) {
                             try {
                                 System.out.println("Ingrese el cargo que desea buscar:");
-                                String cargoBuscar = teclado.next();
+                                String cargoBuscar = teclado.next().toLowerCase();
 
                                 List<Empleado> empleadosPorCargo = control.buscarEmpleadosPorCargo(cargoBuscar);
 
@@ -323,6 +320,7 @@ public class Empresa {
                             }
                         }
                         break;
+
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida. Por favor, ingrese un número del 0 al 5.");
